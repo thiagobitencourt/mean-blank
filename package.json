@@ -1,0 +1,21 @@
+{
+  "name": "mean-blank",
+  "version": "1.0.0",
+  "description": "A MEAN stack blank project structure to start coding",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angularjs",
+    "nodejs",
+    "mongodb",
+    "expressjs",
+    "mean"
+  ],
+  "author": "Thiago R. M. Bitencourt",
+  "license": "ISC",
+  "dependencies": {
+    "http": "0.0.0"
+  }
+}

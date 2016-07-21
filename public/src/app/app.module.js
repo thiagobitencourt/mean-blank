@@ -2,7 +2,11 @@
     'use strict';
 
     angular
-        .module('app', [
-            // 'dependencies'
+        .module('angularBlank', [
+            /* vendor dependencies */
+            'ui.router',
+            /* own dependencies */
+            'app.home',
+            'app.second'
         ]);
 })();

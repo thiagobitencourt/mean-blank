@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="angularBlank">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Angular blank project structure</title>
   </head>
   <body>
-    <h1>Hello world!</h1>
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <div class="content" ui-view></div>
+    <!-- <header>
+    </header>
+    <section>
+    </section> -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+
+    <script type="text/javascript" src="app/modules/home/home.module.js"></script>
+    <script type="text/javascript" src="app/modules/home/home.controller.js"></script>
+    <script type="text/javascript" src="app/modules/second/second.module.js"></script>
+    <script type="text/javascript" src="app/modules/second/second.controller.js"></script>
+    <script type="text/javascript" src="app/app.module.js"></script>
+    <script type="text/javascript" src="app/core/app.config.js"></script>
   </body>
 </html>

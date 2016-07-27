@@ -1,0 +1,11 @@
+{
+  "connect": {
+    "dbUrl": "mongodb://localhost",
+    "dbPort": 27017,
+    "dbName": "blank",
+  },
+  "auth": {
+    "dbUsername": "dbuser",
+    "dbPassword": "dbpass"
+  }
+}

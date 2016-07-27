@@ -16,6 +16,7 @@
   "author": "Thiago R. M. Bitencourt",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "http": "0.0.0"
   }
 }

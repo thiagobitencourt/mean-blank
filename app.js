@@ -7,41 +7,53 @@ global.__base = __dirname + '/server/';
 
 var express = require('express');
 var bodyParser = require('body-parser');
-// var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var http = require('http');
+var jsonfile = require('jsonfile')
+var file = __base + 'config/database.json'
 
-var app = express();
+jsonfile.readFile(file, function(err, config) {
+  if(err) console.error(err);
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json({type: 'application/json'}));
+  mongoose.connect(config.connect.dbUrl + ':' + config.connect.dbPort + '/' + config.connect.dbName, null, function(dbErr){
 
-//Necessary headers to clients access.
-app.all('*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+    if(dbErr)
+  		return console.error("DB error : " + dbErr);
 
-app.all('*', function(req, res, next){
-  res.response = function(error, responseStatus, message){
-    var sendMessage = {message: message, status: responseStatus};
+    var app = express();
 
-    if(error){
-      sendMessage.error = error;
-    }
-    return res.status(responseStatus).send(sendMessage);
-  }
-  next();
-});
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json({type: 'application/json'}));
 
-app.use('/', express.static('public/src'));
+    //Necessary headers to clients access.
+    app.all('*', function(req, res, next) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Credentials', 'true');
+      res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      next();
+    });
 
-var LoadRouter = require(__base + 'routes/loadRoutes');
-app.use('/api', new LoadRouter());
+    app.all('*', function(req, res, next){
+      res.response = function(error, responseStatus, message){
+        var sendMessage = {message: message, status: responseStatus};
 
-var httpPort = 8080;
-http.createServer(app).listen(httpPort, function(){
-  console.log("HTTP server listening on port %s", httpPort);
+        if(error){
+          sendMessage.error = error;
+        }
+        return res.status(responseStatus).send(sendMessage);
+      }
+      next();
+    });
+
+    app.use('/', express.static('public/src'));
+
+    var LoadRouter = require(__base + 'routes/loadRoutes');
+    app.use('/api', new LoadRouter());
+
+    var httpPort = 8080;
+    http.createServer(app).listen(httpPort, function(){
+      console.log("HTTP server listening on port %s", httpPort);
+    });
+  });
 });

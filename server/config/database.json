@@ -2,7 +2,7 @@
   "connect": {
     "dbUrl": "mongodb://localhost",
     "dbPort": 27017,
-    "dbName": "blank",
+    "dbName": "blank"
   },
   "auth": {
     "dbUsername": "dbuser",
